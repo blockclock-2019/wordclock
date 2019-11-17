@@ -10,7 +10,9 @@ In this repo you can find the two healthchecks and the clock's software.
 
 The healthchecks are used to check if the hardware functions correctly before final assembly.
 
+### wordclock
 
+This is the software that should be flashed after final assembly is finished.
 
 ## CNC-Files
 
