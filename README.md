@@ -21,3 +21,5 @@ StringSplitter: https://github.com/aharshac/StringSplitter - The limit on output
 
 ## CNC-Files
 The files used by the CNC-Machine are also in here.
+
+If you want to produces the plates yourself, please pay attention to configure your CNC-machine correctly, so the drill doesn't hit the bed.
