@@ -33,7 +33,7 @@
 #define nightmode true //This is for toggling on and off day/nightmode
 #define NIGHT_START 22 //This is the time when the nightmode should be enabled
 #define NIGHT_END 8 //This is the time when the nightmode should be disabled
-#define brightnessDay 70 //This is the brightness in daymode
+#define brightnessDay 100 //This is the brightness in daymode
 #define brightnessNight 10 //This is the brightness in nightmode
 
 //Delay controls
