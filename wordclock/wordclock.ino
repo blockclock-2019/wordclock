@@ -311,14 +311,12 @@ void setup() {
   bgColor.g = 0;
   bgColor.b = 0;
 
-  fgColor.r = 255; //Setting the foregroundcolor to white
-  fgColor.g = 255;
-  fgColor.b = 255;
+  fgColor = colors[0]; //Setting the foregroundcolor to the first color
 
   FastLED.addLeds<NEOPIXEL, DATA_PIN>(leds, NUM_LEDS); //Initializing the controls for the LEDs
   FastLED.setBrightness(brightnessDay); //Setting the brightness to default day brightness
 
-  setTime(12, 0, 0, 25, 11, 2019); //This is required for the nightmode to work logically
+  setTime(12, 0, 0, 29, 11, 2019); //This is required for the nightmode to work logically
 
   lastHour = hour(); //initializing the lastHour variable to prevent unexpected behaviour
 
