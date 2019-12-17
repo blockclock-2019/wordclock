@@ -13,8 +13,12 @@
 */
 
 #include <FastLED.h>
+
+
 #define NUM_LEDS 121
 #define DATA_PIN D4
+
+const float version = 2.35;
 
 CRGB leds[NUM_LEDS];
     
@@ -22,7 +26,8 @@ void setup() {
   FastLED.addLeds<NEOPIXEL, DATA_PIN>(leds, NUM_LEDS);
   FastLED.setBrightness( 40 );
   Serial.begin(9600);
-  Serial.println("Starting display test! Send a 'n' to commence the next test part!");
+  Serial.println("Firmware version: DISPLAY-HEALTHCHECK " + (String)version);
+  Serial.println("Starting display test! Send anything on the serialport to commence the next test part!");
 
   //Full white
   Serial.println("First test: full white display!");
@@ -163,36 +168,16 @@ void setup() {
   Serial.readString();
 
   //Complete
-  Serial.println("The test is over, you can now test the dcf receiver, \n or if this is already done, you are ready for the real software");
-  
+  Serial.println("The test is over, you can now test the buttons, \n or if this is already done, you are ready for the real software");
+
+  for(int i = 0; i < NUM_LEDS; i++) {
+      leds[i] = CRGB::Green;
+      FastLED.show();
+      delay(100);
+  }
   
 }
 
 void loop() {
-  for(int i = 0; i < NUM_LEDS; i++) {
-      int led = i;
-      leds[led] = CRGB::Red; 
-      FastLED.show();
-      delay(100);
-      
-      leds[led] = CRGB::Black;
-      FastLED.show();
-      delay(100);
-    }
-
-    for(int i = 0; i < NUM_LEDS; i++) {
-      int led = i;
-      leds[led] = CRGB::White; 
-      
-    }
-    FastLED.show();
-    delay(5000);
-
-    for(int i = 0; i < NUM_LEDS; i++) {
-      int led = i;
-      leds[led] = CRGB::Black; 
-      
-    }
-
-    FastLED.show();
+  delay(100000);
 }

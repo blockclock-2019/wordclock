@@ -14,46 +14,43 @@
 */
 
 
-#define MODE1 D1
-#define MODE2 D2
-#define MODE3 D5
-#define PREV D7
-#define NEXT D6
+#define BTN_NEXT D7 //Pin for Next-button
+#define BTN_PREV D6 //Pin for previous-button
+#define SEL_MOD1 D1 //This mode is for moving hours
+#define SEL_MOD2 D2 //This mode is for moving 5 Minutes
+#define SEL_MOD3 D5 //This mode is for changing colors
 
+const float version = 2.35;
 
 void setup() {
-  pinMode(MODE1, INPUT);
-  pinMode(MODE2, INPUT);
-  pinMode(MODE3, INPUT);
-  pinMode(PREV, INPUT);
-  pinMode(NEXT, INPUT);
+  pinMode(BTN_NEXT, INPUT);
+  pinMode(BTN_PREV, INPUT);
+  pinMode(SEL_MOD1, INPUT);
+  pinMode(SEL_MOD2, INPUT);
+  pinMode(SEL_MOD3, INPUT);
   Serial.begin(9600);
-  Serial.println("Press any button you like");
+  Serial.println("Firmware version: BUTTON-HEALTHCHECK " + (String)version);
+  Serial.println("Please follow the instructions from the serialport");
 }
 
 void loop() {
-  if(digitalRead(PREV) == HIGH) {
-    if(digitalRead(MODE1) == HIGH) {
-      Serial.println("Button previous was pressed! Current mode is MODE1"); 
-    }
-    if(digitalRead(MODE2) == HIGH) {
-      Serial.println("Button previous was pressed! Current mode is MODE2");
-    }
-    if(digitalRead(MODE3) == HIGH) {
-      Serial.println("Button previous was pressed! Current mode is MODE3");
-    }
-  }
+  Serial.println("Please press the next-button!");
+  while(digitalRead(BTN_NEXT) == LOW) delay(100);
+  Serial.println("Success!");
+  
+  Serial.println("Please press the previous-button!");
+  while(digitalRead(BTN_PREV) == LOW) delay(100);
+  Serial.println("Success!");
 
-  if(digitalRead(NEXT) == HIGH) {
-    if(digitalRead(MODE1) == HIGH) {
-      Serial.println("Button next was pressed! Current mode is MODE1"); 
-    }
-    if(digitalRead(MODE2) == HIGH) {
-      Serial.println("Button next was pressed! Current mode is MODE2");
-    }
-    if(digitalRead(MODE3) == HIGH) {
-      Serial.println("Button next was pressed! Current mode is MODE3");
-    }
-  }
-  delay(100);
+  Serial.println("Please put the mode-switch into hour-mode!");
+  while(digitalRead(SEL_MOD1) == LOW) delay(100);
+  Serial.println("Success!");
+
+  Serial.println("Please put the mode-switch into minute-mode!");
+  while(digitalRead(SEL_MOD2) == LOW) delay(100);
+  Serial.println("Success! Assuming, color-mode is wired correctly.");
+  
+  Serial.println("Test successful!");
+  Serial.println("The test will be restarted in 10 seconds. If anything was wrong, you can swap it now if the switches are unpluggable.");
+  delay(10000);
 }
