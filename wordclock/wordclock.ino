@@ -11,7 +11,6 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
-
 #include <FastLED.h> //http://fastled.io/
 #include <Time.h> //https://github.com/PaulStoffregen/Time
 #include <stdlib.h> //This is a standard arduino library
@@ -56,7 +55,7 @@ int time_minutes[][12] = { //This array saves the LEDs that are required for eac
   { 66,  67,  68,  69,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1},
   {117, 118, 119, 120,  85,  84,  83,  82,  66,  67,  68,  69},
   {105, 104, 103, 102, 101, 100,  99,  81,  80,  79,  -1,  -1},
-  { 92,  93,  94,  95,  96,  97,  98,  81,  80,  79,  -1,  -1},
+  { 98,  97,  96,  95,  94,  93,  92,  91,  90,  89,  88,  -1},
   {109, 108, 107, 106,  81,  80,  79,  -1,  -1,  -1,  -1,  -1},
   {117, 118, 119, 120,  81,  80,  79,  -1,  -1,  -1,  -1,  -1}
 };
@@ -105,11 +104,11 @@ int b = 255;*/
 
 //HERE ARE THE VARIABLES FOR THE FIRMWAREVERSION AND DISTRIBUTOR INFO
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-const float version = 2.36; //This is the version, it should be counted as follows Major.MinorBugfix
+const float version = 2.37; //This is the version, it should be counted as follows Major.MinorBugfix
 const String vendor = "Superengine"; //This is where the vendor company's name should go
 const String name = "clockOS"; //This is the name for the system
 const String releaseType = "release"; //Here is room for a release note like: PRE-ALPHA, ALPHA, BETA, CANDIDATE, release and LEGACY
-const String releaseDate = "2019/12/17"; //This is for saving the date on that this version was finished
+const String releaseDate = "2019/12/20"; //This is for saving the date on that this version was finished
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
 color_t bgColor; //This is the variable that saves the background color
@@ -316,7 +315,7 @@ void setup() {
   FastLED.addLeds<NEOPIXEL, DATA_PIN>(leds, NUM_LEDS); //Initializing the controls for the LEDs
   FastLED.setBrightness(brightnessDay); //Setting the brightness to default day brightness
 
-  setTime(12, 0, 0, 17, 12, 2019); //This is required for the nightmode to work logically
+  setTime(12, 0, 0, 20, 12, 2019); //This is required for the nightmode to work logically
 
   lastHour = hour(); //initializing the lastHour variable to prevent unexpected behaviour
 
