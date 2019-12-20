@@ -107,8 +107,8 @@ int b = 255;*/
 const float version = 2.37; //This is the version, it should be counted as follows Major.MinorBugfix
 const String vendor = "Superengine"; //This is where the vendor company's name should go
 const String name = "clockOS"; //This is the name for the system
-const String releaseType = "CANDIDATE"; //Here is room for a release note like: PRE-ALPHA, ALPHA, BETA, CANDIDATE, release and LEGACY
-const String releaseDate = "2019/12/18"; //This is for saving the date on that this version was finished
+const String releaseType = "release"; //Here is room for a release note like: PRE-ALPHA, ALPHA, BETA, CANDIDATE, release and LEGACY
+const String releaseDate = "2019/12/20"; //This is for saving the date on that this version was finished
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
 color_t bgColor; //This is the variable that saves the background color
@@ -315,7 +315,7 @@ void setup() {
   FastLED.addLeds<NEOPIXEL, DATA_PIN>(leds, NUM_LEDS); //Initializing the controls for the LEDs
   FastLED.setBrightness(brightnessDay); //Setting the brightness to default day brightness
 
-  setTime(12, 0, 0, 18, 12, 2019); //This is required for the nightmode to work logically
+  setTime(12, 0, 0, 20, 12, 2019); //This is required for the nightmode to work logically
 
   lastHour = hour(); //initializing the lastHour variable to prevent unexpected behaviour
 
