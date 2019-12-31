@@ -82,36 +82,36 @@
   boolean displaySetupSucces = true;
 #else
 #if HARDWARE_REVISION == 1
-  int time_it_is[] = {110, 111, 113, 114, 115}; //This array saves the LEDs required for the part of the display that says "Es ist"
+  int time_it_is[] = {92, 91, 90, 89, 88}; //This array saves the LEDs required for the part of the display that says "Es ist"
   
   int time_minutes[][12] = { //This array saves the LEDs that are required for each minute step
-    { 13,  12,  11,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1},
-    {117, 118, 119, 120,  85,  84,  83,  82,  -1,  -1,  -1,  -1},
-    {109, 108, 107, 106,  85,  84,  83,  82,  -1,  -1,  -1,  -1},
-    { 92,  93,  94,  95,  96,  97,  98,  85,  84,  83,  82,  -1},
-    {105, 104, 103, 102, 101, 100,  99,  85,  84,  83,  82,  -1},
-    {117, 118, 119, 120,  81,  80,  79,  66,  67,  68,  69,  -1},
-    { 66,  67,  68,  69,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1},
-    {117, 118, 119, 120,  85,  84,  83,  82,  66,  67,  68,  69},
-    {105, 104, 103, 102, 101, 100,  99,  81,  80,  79,  -1,  -1},
-    { 98,  97,  96,  95,  94,  93,  92,  91,  90,  89,  88,  -1},
-    {109, 108, 107, 106,  81,  80,  79,  -1,  -1,  -1,  -1,  -1},
-    {117, 118, 119, 120,  81,  80,  79,  -1,  -1,  -1,  -1,  -1}
+    {  5,   6,   7,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1},
+    { 87,  86,  85,  84,  55,  56,  57,  58,  -1,  -1,  -1,  -1},
+    { 73,  74,  75,  76,  55,  56,  57,  58,  -1,  -1,  -1,  -1},
+    { 68,  67,  66,  65,  64,  63,  62,  55,  56,  57,  58,  -1},
+    { 77,  78,  79,  80,  81,  82,  83,  55,  56,  57,  58,  -1},
+    { 87,  86,  85,  84,  59,  60,  61,  54,  53,  52,  51,  -1},
+    { 54,  53,  52,  51,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1},
+    { 87,  86,  85,  84,  55,  56,  57,  58,  54,  53,  52,  51},
+    { 77,  78,  79,  80,  81,  82,  83,  59,  60,  61,  -1,  -1},
+    { 62,  63,  64,  65,  66,  67,  68,  69,  70,  71,  72,  -1},
+    { 73,  74,  75,  76,  59,  60,  61,  -1,  -1,  -1,  -1,  -1},
+    { 87,  86,  85,  84,  59,  60,  61,  -1,  -1,  -1,  -1,  -1}
   };
 
   int time_hours[][6] = { //This array saves the LEDs that are required for each hour
-    {71, 72, 73, 74, 75, -1},
-    {63, 62, 61, 60, -1, -1},
-    {65, 64, 63, 62, -1, -1},
-    {45, 46, 47, 48, -1, -1},
-    {36, 35, 34, 33, -1, -1},
-    {51, 52, 53, 54, -1, -1},
-    {20, 19, 18, 17, 16, -1},
-    {60, 59, 58, 57, 56, 55},
+    {50, 49, 48, 47, 46, -1},
+    {37, 38, 39, 40, -1, -1},
+    {35, 36, 37, 38, -1, -1},
+    {34, 33, 32, 31, -1, -1},
     {23, 24, 25, 26, -1, -1},
-    {40, 39, 38, 37, -1, -1},
-    {27, 28, 29, 30, -1, -1},
-    {43, 42, 41, -1, -1, -1}
+    {30, 29, 28, 27, -1, -1},
+    { 0,  1,  2,  3,  4, -1},
+    {40, 41, 42, 43, 44, 45},
+    {15, 14, 13, 12, -1, -1},
+    {19, 20, 21, 22, -1, -1},
+    {11, 10,  9,  8, -1, -1},
+    {16, 17, 18, -1, -1, -1}
   };
   boolean displaySetupSucces = true;
 #else
@@ -197,12 +197,24 @@ void setDisplayTime(int h, int m) { //This sets the display to the time
     leds[time_it_is[i]].setRGB(fgColor.r, fgColor.g, fgColor.b);
   } 
   if(h == 1 && m == 0) { //If it is 1 o'clock, those LEDs must be turned on
-    leds[11].setRGB(fgColor.r, fgColor.g, fgColor.b);
-    leds[12].setRGB(fgColor.r, fgColor.g, fgColor.b);
-    leds[13].setRGB(fgColor.r, fgColor.g, fgColor.b);
-    leds[61].setRGB(fgColor.r, fgColor.g, fgColor.b);
-    leds[62].setRGB(fgColor.r, fgColor.g, fgColor.b);
-    leds[63].setRGB(fgColor.r, fgColor.g, fgColor.b);
+    switch(HARDWARE_REVISION) {
+      case 0: {
+        leds[11].setRGB(fgColor.r, fgColor.g, fgColor.b);
+        leds[12].setRGB(fgColor.r, fgColor.g, fgColor.b);
+        leds[13].setRGB(fgColor.r, fgColor.g, fgColor.b);
+        leds[61].setRGB(fgColor.r, fgColor.g, fgColor.b);
+        leds[62].setRGB(fgColor.r, fgColor.g, fgColor.b);
+        leds[63].setRGB(fgColor.r, fgColor.g, fgColor.b);
+      } break;
+      case 1: {
+        leds[5].setRGB(fgColor.r, fgColor.g, fgColor.b);
+        leds[6].setRGB(fgColor.r, fgColor.g, fgColor.b);
+        leds[7].setRGB(fgColor.r, fgColor.g, fgColor.b);
+        leds[37].setRGB(fgColor.r, fgColor.g, fgColor.b);
+        leds[38].setRGB(fgColor.r, fgColor.g, fgColor.b);
+        leds[39].setRGB(fgColor.r, fgColor.g, fgColor.b);
+      }
+    }
   } else {
     for(int mm = 0; mm < 12; mm++) { //Here the minute LEDs according to the minute count turn on
       if(time_minutes[m][mm] >= 0) {
