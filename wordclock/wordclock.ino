@@ -11,11 +11,14 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
+#include "wclock.h"
 #include <FastLED.h> //http://fastled.io/
 #include <Time.h> //https://github.com/PaulStoffregen/Time
 #include <stdlib.h> //This is a standard arduino library
 #include <StringSplitter.h> //https://github.com/aharshac/StringSplitter The limit needs to be increased
 
+//What Hardwarerevision - Prototype & Batch 1: 0;
+#define HARDWARE_REVISION 0
 
 //LED-display controlls
 #define NUM_LEDS 121 //Amount of LEDs in the display -- Don't change this, except if you know, what you are doing but then you will also have to change the code marked as "please don't change"
@@ -43,47 +46,86 @@
 
 //Please don't edit the code here until allowed again
 // -%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%- //
-int time_it_is[] = {110, 111, 113, 114, 115}; //This array saves the LEDs required for the part of the display that says "Es ist"
-  
-int time_minutes[][12] = { //This array saves the LEDs that are required for each minute step
-  { 13,  12,  11,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1},
-  {117, 118, 119, 120,  85,  84,  83,  82,  -1,  -1,  -1,  -1},
-  {109, 108, 107, 106,  85,  84,  83,  82,  -1,  -1,  -1,  -1},
-  { 92,  93,  94,  95,  96,  97,  98,  85,  84,  83,  82,  -1},
-  {105, 104, 103, 102, 101, 100,  99,  85,  84,  83,  82,  -1},
-  {117, 118, 119, 120,  81,  80,  79,  66,  67,  68,  69,  -1},
-  { 66,  67,  68,  69,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1},
-  {117, 118, 119, 120,  85,  84,  83,  82,  66,  67,  68,  69},
-  {105, 104, 103, 102, 101, 100,  99,  81,  80,  79,  -1,  -1},
-  { 98,  97,  96,  95,  94,  93,  92,  91,  90,  89,  88,  -1},
-  {109, 108, 107, 106,  81,  80,  79,  -1,  -1,  -1,  -1,  -1},
-  {117, 118, 119, 120,  81,  80,  79,  -1,  -1,  -1,  -1,  -1}
-};
 
-int time_hours[][6] = { //This array saves the LEDs that are required for each hour
-  {71, 72, 73, 74, 75, -1},
-  {63, 62, 61, 60, -1, -1},
-  {65, 64, 63, 62, -1, -1},
-  {45, 46, 47, 48, -1, -1},
-  {36, 35, 34, 33, -1, -1},
-  {51, 52, 53, 54, -1, -1},
-  {20, 19, 18, 17, 16, -1},
-  {60, 59, 58, 57, 56, 55},
-  {23, 24, 25, 26, -1, -1},
-  {40, 39, 38, 37, -1, -1},
-  {27, 28, 29, 30, -1, -1},
-  {43, 42, 41, -1, -1, -1}
-};
+#if HARDWARE_REVISION == 0  
+  int time_it_is[] = {110, 111, 113, 114, 115}; //This array saves the LEDs required for the part of the display that says "Es ist"
+  
+  int time_minutes[][12] = { //This array saves the LEDs that are required for each minute step
+    { 13,  12,  11,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1},
+    {117, 118, 119, 120,  85,  84,  83,  82,  -1,  -1,  -1,  -1},
+    {109, 108, 107, 106,  85,  84,  83,  82,  -1,  -1,  -1,  -1},
+    { 92,  93,  94,  95,  96,  97,  98,  85,  84,  83,  82,  -1},
+    {105, 104, 103, 102, 101, 100,  99,  85,  84,  83,  82,  -1},
+    {117, 118, 119, 120,  81,  80,  79,  66,  67,  68,  69,  -1},
+    { 66,  67,  68,  69,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1},
+    {117, 118, 119, 120,  85,  84,  83,  82,  66,  67,  68,  69},
+    {105, 104, 103, 102, 101, 100,  99,  81,  80,  79,  -1,  -1},
+    { 98,  97,  96,  95,  94,  93,  92,  91,  90,  89,  88,  -1},
+    {109, 108, 107, 106,  81,  80,  79,  -1,  -1,  -1,  -1,  -1},
+    {117, 118, 119, 120,  81,  80,  79,  -1,  -1,  -1,  -1,  -1}
+  };
+
+  int time_hours[][6] = { //This array saves the LEDs that are required for each hour
+    {71, 72, 73, 74, 75, -1},
+    {63, 62, 61, 60, -1, -1},
+    {65, 64, 63, 62, -1, -1},
+    {45, 46, 47, 48, -1, -1},
+    {36, 35, 34, 33, -1, -1},
+    {51, 52, 53, 54, -1, -1},
+    {20, 19, 18, 17, 16, -1},
+    {60, 59, 58, 57, 56, 55},
+    {23, 24, 25, 26, -1, -1},
+    {40, 39, 38, 37, -1, -1},
+    {27, 28, 29, 30, -1, -1},
+    {43, 42, 41, -1, -1, -1}
+  };
+  boolean displaySetupSucces = true;
+#else
+#if HARDWARE_REVISION == 1
+  int time_it_is[] = {110, 111, 113, 114, 115}; //This array saves the LEDs required for the part of the display that says "Es ist"
+  
+  int time_minutes[][12] = { //This array saves the LEDs that are required for each minute step
+    { 13,  12,  11,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1},
+    {117, 118, 119, 120,  85,  84,  83,  82,  -1,  -1,  -1,  -1},
+    {109, 108, 107, 106,  85,  84,  83,  82,  -1,  -1,  -1,  -1},
+    { 92,  93,  94,  95,  96,  97,  98,  85,  84,  83,  82,  -1},
+    {105, 104, 103, 102, 101, 100,  99,  85,  84,  83,  82,  -1},
+    {117, 118, 119, 120,  81,  80,  79,  66,  67,  68,  69,  -1},
+    { 66,  67,  68,  69,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1},
+    {117, 118, 119, 120,  85,  84,  83,  82,  66,  67,  68,  69},
+    {105, 104, 103, 102, 101, 100,  99,  81,  80,  79,  -1,  -1},
+    { 98,  97,  96,  95,  94,  93,  92,  91,  90,  89,  88,  -1},
+    {109, 108, 107, 106,  81,  80,  79,  -1,  -1,  -1,  -1,  -1},
+    {117, 118, 119, 120,  81,  80,  79,  -1,  -1,  -1,  -1,  -1}
+  };
+
+  int time_hours[][6] = { //This array saves the LEDs that are required for each hour
+    {71, 72, 73, 74, 75, -1},
+    {63, 62, 61, 60, -1, -1},
+    {65, 64, 63, 62, -1, -1},
+    {45, 46, 47, 48, -1, -1},
+    {36, 35, 34, 33, -1, -1},
+    {51, 52, 53, 54, -1, -1},
+    {20, 19, 18, 17, 16, -1},
+    {60, 59, 58, 57, 56, 55},
+    {23, 24, 25, 26, -1, -1},
+    {40, 39, 38, 37, -1, -1},
+    {27, 28, 29, 30, -1, -1},
+    {43, 42, 41, -1, -1, -1}
+  };
+  boolean displaySetupSucces = true;
+#else
+  static int time_it_is[] = null;
+  static int time_minutes[][12] = null;
+  static int time_hours[][6] = null;
+  boolean displaySetupSucces = false;
+#endif
+#endif
+
 // -%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%- //
 //From here on you may edit the code again
 
 //Here the declaration of variables begins and a first method and a struct are defined
-
-typedef struct { 
-  int r;
-  int g;
-  int b;
-} color_t;
 
 // ------------
 
@@ -104,11 +146,11 @@ int b = 255;*/
 
 //HERE ARE THE VARIABLES FOR THE FIRMWAREVERSION AND DISTRIBUTOR INFO
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-const float version = 2.37; //This is the version, it should be counted as follows Major.MinorBugfix
+const float version = 2.38; //This is the version, it should be counted as follows Major.MinorBugfix
 const String vendor = "Superengine"; //This is where the vendor company's name should go
 const String name = "clockOS"; //This is the name for the system
 const String releaseType = "release"; //Here is room for a release note like: PRE-ALPHA, ALPHA, BETA, CANDIDATE, release and LEGACY
-const String releaseDate = "2019/12/20"; //This is for saving the date on that this version was finished
+const String releaseDate = "2020/01/01"; //This is for saving the date on that this version was finished
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
 color_t bgColor; //This is the variable that saves the background color
@@ -296,6 +338,16 @@ void setup() {
   }
   Serial.println("Booting up...");
 
+  if(!displaySetupSucces) {
+    Serial.println("System Panic!");
+    Serial.println(" Unable to setup display!");
+    Serial.println(" Possibly faulty firmware, or invalid HARDWARE_REVISION!");
+    Serial.println("RIP: Restarting in 2 seconds...");
+    delay(2000);
+    Serial.println("Commence restart...");
+    softwareReset(WDTO_15MS);
+  }
+
   pinMode(BTN_NEXT, INPUT); //assigning the buttonpins as inputs
   pinMode(BTN_PREV, INPUT);
 
@@ -315,7 +367,7 @@ void setup() {
   FastLED.addLeds<NEOPIXEL, DATA_PIN>(leds, NUM_LEDS); //Initializing the controls for the LEDs
   FastLED.setBrightness(brightnessDay); //Setting the brightness to default day brightness
 
-  setTime(12, 0, 0, 20, 12, 2019); //This is required for the nightmode to work logically
+  setTime(12, 0, 0, 01, 01, 2020); //This is required for the nightmode to work logically
 
   lastHour = hour(); //initializing the lastHour variable to prevent unexpected behaviour
 
