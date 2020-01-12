@@ -35,8 +35,8 @@
 #define nightmode true //This is for toggling on and off day/nightmode
 #define NIGHT_START 22 //This is the time when the nightmode should be enabled
 #define NIGHT_END 8 //This is the time when the nightmode should be disabled
-#define brightnessDay 100 //This is the brightness in daymode
-#define brightnessNight 25 //This is the brightness in nightmode
+#define brightnessDay 50 //This is the brightness in daymode
+#define brightnessNight 5 //This is the brightness in nightmode
 
 //Delay controls
 #define BTN_DELAY 250 //This is for setting the time after which the next button press can be registered, this is to stop unexpected behaviour Default: 250
@@ -146,11 +146,11 @@ int b = 255;*/
 
 //HERE ARE THE VARIABLES FOR THE FIRMWAREVERSION AND DISTRIBUTOR INFO
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-const float version = 2.38; //This is the version, it should be counted as follows Major.MinorBugfix
+const float version = 2.40; //This is the version, it should be counted as follows Major.MinorBugfix
 const String vendor = "Superengine"; //This is where the vendor company's name should go
 const String name = "clockOS"; //This is the name for the system
 const String releaseType = "release"; //Here is room for a release note like: PRE-ALPHA, ALPHA, BETA, CANDIDATE, release and LEGACY
-const String releaseDate = "2020/01/01"; //This is for saving the date on that this version was finished
+const String releaseDate = "2020/01/12"; //This is for saving the date on that this version was finished
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
 color_t bgColor; //This is the variable that saves the background color
