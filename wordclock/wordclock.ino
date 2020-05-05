@@ -147,7 +147,7 @@ int b = 255;*/
 //HERE ARE THE VARIABLES FOR THE FIRMWAREVERSION AND DISTRIBUTOR INFO
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 const float version = 2.40; //This is the version, it should be counted as follows Major.MinorBugfix
-const String vendor = "Superengine"; //This is where the vendor company's name should go
+const String vendor = "BlockClock"; //This is where the vendor company's name should go
 const String name = "clockOS"; //This is the name for the system
 const String releaseType = "release"; //Here is room for a release note like: PRE-ALPHA, ALPHA, BETA, CANDIDATE, release and LEGACY
 const String releaseDate = "2020/01/12"; //This is for saving the date on that this version was finished
